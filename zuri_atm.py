@@ -1,15 +1,16 @@
+import re
+import time
 from datetime import datetime as dt
 from random import randrange
 from tqdm import tqdm
-import time
-import re
 
-DATABASE = {1000000000:['John', 'Doe', 'john@doe.gmail.com', 1111, 50000 ]}
 
+DATABASE = {}
 
 
 
 def register():
+
 
 	print("\n" + " Kindly Fill The Form ".center(50, "*") + "\n")
 
@@ -66,11 +67,11 @@ def auth_reg(first, last, email, pass_word):
 		print("Names can only be strings\n")
 		STATUS = True
 
-	if not re.match(r'\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b', email):
+	if not re.search(r'[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}', email):
 		raise ValueError
 
 	
-	if len(str(pass_word)) > 4 or len(str(pass_word) < 4):
+	if len(str(pass_word)) > 4 or len(str(pass_word)) < 4:
 
 		print("\nPassword Longer than Required. Try Again\n")
 		STATUS = True
@@ -151,10 +152,11 @@ def generate_account():
 
 	EXCLUSION_LIST = []
 
+
 	while True:
 		ACCOUNT_GENERATED = randrange(1000000001, 9999999999)
 
-		if ACCOUNT_GENERATED in EXCLUSION_LIST:
+		if ACCOUNT_GENERATED in EXCLUSION_LIST :
 			continue
 
 		else:
@@ -162,13 +164,11 @@ def generate_account():
 			for i in tqdm(range(int(10099999)), ascii=True, desc="Generating Account"):
 				pass
 
-			EXCLUSION_LIST.append(ACCOUNT_GENERATED)
 			print("\nAccount Successfully Generated".center(50, "*").title())
+
 			break
-
+			
 	return ACCOUNT_GENERATED
-
-
 
 
 def current_time():
